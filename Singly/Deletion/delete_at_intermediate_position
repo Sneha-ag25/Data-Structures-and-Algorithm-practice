@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *deleteIntermediate(struct node *head, int x)
+{
+    struct node *p, *s;
+    p=head;
+    while(p!=NULL && p->data!=x)
+        {
+            p=p->next;
+        }
+    if(p!= NULL && p->data==x)
+    {
+        s=p->next;
+        p->next=s->next;
+        free(s);
+    }
+    return head;   
+};
+
+int main()
+{
+    struct node *head, *second, *third;
+    head=(struct node*)malloc(sizeof(struct node));
+    second=(struct node*)malloc(sizeof(struct node));
+    third=(struct node*)malloc(sizeof(struct node));
+
+    head->data=35;
+    head->next=second;
+
+    second->data=45;
+    second->next=third;
+
+    third->data=66;
+    third->next=NULL;
+
+    head=deleteIntermediate(head, 45);
+
+    return 0;
+
+}
